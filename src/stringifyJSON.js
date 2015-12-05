@@ -34,18 +34,20 @@ var stringifyJSON = function(input) {
 
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
-
-        if (i === keys.length - 1) {
-          finalString += stringifyJSON(key) + ":" + stringifyJSON(input[key]);
-        } else {
-          finalString += stringifyJSON(key) + ':' + stringifyJSON(input[key]) + ',';
-        }
+        if (typeof key === 'function' || typeof input[key] === 'function') {
+        return '{}';
       }
-      return '{' + finalString + '}';
-    } else {
-      return '{}';
+      if (i === keys.length - 1) {
+        finalString += stringifyJSON(key) + ":" + stringifyJSON(input[key]);
+      } else {
+        finalString += stringifyJSON(key) + ':' + stringifyJSON(input[key]) + ',';
+      }
     }
+    return '{' + finalString + '}';
+  } else {
+    return '{}';
   }
+}
 
-  return input.toString();
+return input.toString();
 };
