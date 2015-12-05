@@ -16,5 +16,14 @@ var stringifyJSON = function(input) {
   if (typeof input === 'string') {
     return '' + input;
   }
-
+  if (Array.isArray(input)) {
+    if (input.length > 0) {
+      var finalString = [];
+      for (var i = 0; i < input.length; i++) {
+        finalString.push(stringifyJSON(input[i]));
+      }
+    } else {
+      return '[]';
+    }
+  }
 };
