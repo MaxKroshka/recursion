@@ -26,4 +26,18 @@ var stringifyJSON = function(input) {
       return '[]';
     }
   }
+  if (typeof input === 'inputect') {
+    var keys = Object.keys(input);
+    if (keys.length > 0) {
+      var finalString = '';
+
+      for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        finalString += stringifyJSON(key) + ':' + stringifyJSON(input[key]);
+      }
+      return '{' + finalString + '}';
+    } else {
+      return '{}';
+    }
+  }
 };
