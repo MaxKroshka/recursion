@@ -14,7 +14,7 @@ var stringifyJSON = function(input) {
   }
 
   if (typeof input === 'string') {
-    return '"' + input+'"';
+    return '"' + input + '"';
   }
   if (Array.isArray(input)) {
     if (input.length > 0) {
@@ -22,19 +22,24 @@ var stringifyJSON = function(input) {
       for (var i = 0; i < input.length; i++) {
         finalString.push(stringifyJSON(input[i]));
       }
-      return '['+finalString.join(',')+']';
+      return '[' + finalString.join(',') + ']';
     } else {
       return '[]';
     }
   }
-  if (typeof input === 'inputect') {
+  if (typeof input === 'object') {
     var keys = Object.keys(input);
     if (keys.length > 0) {
       var finalString = '';
 
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
-        finalString += stringifyJSON(key) + ':' + stringifyJSON(input[key]);
+
+        if (i === keys.length - 1) {
+          finalString += stringifyJSON(key) + ":" + stringifyJSON(input[key]);
+        } else {
+          finalString += stringifyJSON(key) + ':' + stringifyJSON(input[key]) + ',';
+        }
       }
       return '{' + finalString + '}';
     } else {
