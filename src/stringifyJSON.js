@@ -5,18 +5,22 @@
 
 var stringifyJSON = function(input) {
 
+// Input null
   if (input === null) {
     return 'null';
   }
 
+// Input undefined
   if (input === undefined) {
     return '';
   }
 
+// Input type is a String
   if (typeof input === 'string') {
     return '"' + input + '"';
   }
 
+// Input is an Array
   if (Array.isArray(input)) {
     if (input.length > 0) {
       var finalString = [];
@@ -29,6 +33,7 @@ var stringifyJSON = function(input) {
     }
   }
 
+// Input is an object 
   if (typeof input === 'object') {
     var keys = Object.keys(input);
     if (keys.length > 0) {
@@ -48,5 +53,6 @@ var stringifyJSON = function(input) {
     }
   }
 
+// Input is a number or boolean
   return input.toString();
 };
