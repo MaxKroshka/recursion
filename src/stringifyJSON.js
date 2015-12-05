@@ -6,7 +6,7 @@
 var stringifyJSON = function(input) {
 
   if (input === null) {
-    return null;
+    return 'null';
   }
 
   if (input === undefined) {
@@ -14,7 +14,7 @@ var stringifyJSON = function(input) {
   }
 
   if (typeof input === 'string') {
-    return '' + input;
+    return '"' + input+'"';
   }
   if (Array.isArray(input)) {
     if (input.length > 0) {
@@ -40,4 +40,6 @@ var stringifyJSON = function(input) {
       return '{}';
     }
   }
+
+  return input.toString();
 };
