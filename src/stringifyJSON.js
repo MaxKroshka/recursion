@@ -22,6 +22,7 @@ var stringifyJSON = function(input) {
       for (var i = 0; i < input.length; i++) {
         finalString.push(stringifyJSON(input[i]));
       }
+      return '['+finalString.join(',')+']';
     } else {
       return '[]';
     }
